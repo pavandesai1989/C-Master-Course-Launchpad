@@ -2,6 +2,7 @@
 #include<iostream>
 using namespace std;
 
+//given array is sorted,
 void  pairsum(int arr[],int n,int sum)
 {
     //use 2 pointers approach
