@@ -1,0 +1,87 @@
+1. /*************** first****************/
+create a global var for the row and col.
+ 
+#include <iostream>
+using namespace std;
+
+
+const int row = 3;
+const int col=3;
+
+void print(int arr[row][col])
+{
+    for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            cout<<arr[i][j]<<" ";
+        }
+    }
+}
+
+int main() 
+{
+    int arr[3][3] = {
+      { 1, 5, 4},
+      { 15, 22, 45},
+      {4,5,6}
+   };
+
+    print(arr);
+
+	return 0;
+}
+
+
+/**************************2nd way pass only row from the main function***********/
+ 
+#include <iostream>
+using namespace std;
+
+const int col=3;
+
+void print(int arr[][col],int row)
+{
+    for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            cout<<arr[i][j]<<" ";
+        }
+    }
+}
+
+int main() 
+{
+    int arr[3][3] = {
+      { 1, 5, 4},
+      { 15, 22, 45},
+      {4,5,6}
+   };
+
+    print(arr,3);
+
+	return 0;
+}
+
+/*************************pass both *************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
