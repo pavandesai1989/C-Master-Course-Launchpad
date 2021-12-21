@@ -17,20 +17,6 @@ Sample Output
  #include<iostream>
 using namespace std;
 
-/*void inverse(int arr[],int n,int temp[],int i)
-{
-	for(int i=0;i<n;i++)
-    {
-       int x = arr[i];
-	   if(temp[x] == 0)
-	   {
-		temp[x] = i;
-	   }
-    }
-     for(int i=0;i<n;i++)
-      cout<<temp[i]<<" ";
-}*/
-
 int* inverse(int arr[],int n)
 {
     int* inv = new int[n];
@@ -55,6 +41,47 @@ int main()
 	}
     
     int* inv = inverse(arr,N);
+
+    for(int i=0;i<N;i++)
+    {
+        cout<<inv[i]<<" ";
+    }
+
+	delete[]arr;
+	delete[]inv;
+
+	return 0;
+}
+
+
+/************* recursive ********/
+void inverserecu(int arr[],int size,int i,int* inv)
+{
+    //base case
+    if(i == size)
+       return;
+
+    int pos = arr[i];
+    inv[pos] = i;
+
+    //recursive call
+    inverserecu(arr,size,i+1,inv);   
+}
+
+int main() 
+{    //input size of array
+	int N;
+    cin>>N;
+
+    //input elements of array
+	int* arr = new int[N];
+	for(int i=0;i<N;i++)
+	{
+		cin>>arr[i];
+	}
+
+    int* inv = new int[N];
+    inverserecu(arr,N,0,inv);
 
     for(int i=0;i<N;i++)
     {
