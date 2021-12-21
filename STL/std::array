@@ -1,0 +1,104 @@
+std::array is a container that encapsulates fixed size arrays.
+Unlike a C-style array, it doesn't decay to T* automatically.
+array size is needed at the compile time.
+assign by value is actually by value.
+access elements.
+1. at
+2. []
+3. front
+4.back
+5. data //gives access to underlying array 
+
+    ******syntax*******
+std::array<T, size> array; 
+
+template<typename T,typename N>
+class array
+{
+    T arr[N];
+};
+
+******NOTE: when we pass c style array to a function we pass the pointer, so it will be pass by value. Example as below.No copy is created******
+
+void foo(int arr[],int n)
+{
+    arr[0] = 11;  // changing the 1st ele of array
+}
+
+int main() 
+{   
+    int arr[3] = {1,2,3};
+    foo(arr,3);
+
+    for(auto ele:arr)
+       cout<<ele<<" ";     // 11 2 3 
+
+	return 0;
+}
+
+***********What is Array Decay?************
+The loss of type and dimensions of an array is known as decay of an array.This generally occurs when we pass the array into function by value or pointer.
+What it does is, it sends first address to the array which is a pointer, hence the size of array is not the original one, but the one occupied by the pointer
+in the memory.
+
+How to prevent Array Decay? 
+A typical solution to handle decay is to pass size of array also as a parameter and not use sizeof on array parameters.
+
+******IMP 
+Another way to prevent array decay is to send the array into functions by reference. This prevents conversion of array into a pointer, hence prevents the decay.
+
+void foo(int (&arr) [3] )
+{
+cout<<"Size is "<<sizeof(arr)<<endl;    //op is 12 . decay wont happen
+}
+
+int main() 
+{   
+    int arr[3] = {1,2,3};
+    foo(arr);
+}
+
+Using the std::array decay wont happen and we get the copy of array. array of main wont affect. 
+
+********at and []****** at is bound safe 
+    std::array<int,3> arr {1,2,3};
+
+    cout<<"val is "<<arr[5]<<endl;   //prints the garbage value 
+
+    try{
+        cout<<arr.at(4);
+    }
+    catch (std::out_of_range const& exc){
+        cout<<"out of range exception"<<endl;   //output 
+    }
+    cout<<arr.front()<<endl;  //1
+    cout<<arr.back()<<endl;   //
+    
+    
+    *************initialization ********
+    std::array<int,3> arr = {1,2,3}; //initializer list
+    std::array<int,2> arr{1,2}; //uniform initialization
+
+    //assign using the initializer list
+    std::array<int,3> arr;
+    arr = {4,5,6};   //cant do this in cstyle array
+    
+    //use of data
+     std::array<int,3> arr = {1,2,3}; //initializer list
+
+    int*ptr = arr.data();
+    cout<<ptr[1]<<endl;   //op is 2 
+    
+    //fill array with the same value
+        std::array<int,5> arr; //initializer list
+    arr.fill(34);
+
+    for(const auto ele:arr)
+       cout<<ele<<" ";  // 34 34 34 34 34 
+       
+    //swap 2 arrays
+        std::array<int,3> a1{1,2,3};
+    std::array<int,3> a2{4,5,6};
+
+    a1.swap(a2);
+    
