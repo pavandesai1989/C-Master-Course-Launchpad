@@ -1,2 +1,54 @@
 time : o(n)
 
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void maxheapify(vector<int> &vec,int idx)
+{
+    //get the left and right child
+    int left = 2*idx;
+    int right = 2*idx+1;
+    
+    int last = static_cast<int>(vec.size()-1);
+    int max=idx;
+    
+    if(left<=last && vec[left]>vec[idx])
+        max = left;
+    
+    if(right<=last && vec[right]>vec[max])
+        max = right;
+    
+    if(max!=idx)
+    {
+        swap(vec[max],vec[idx]);
+        maxheapify(vec,max);
+    }
+}
+
+void buildMaxheapfromarray(vector<int> &vec)
+{
+    //get the last non leaf node
+    int last = static_cast<int> ((vec.size()-1)/2);
+    for(int i=last;i>=1;i--)
+    {
+        maxheapify(vec,i);
+    }
+    
+}
+
+
+
+int main()
+{
+    vector<int> v = {-1,10,20,5,6,1,8,9,4};
+    
+    buildMaxheapfromarray(v);
+    //print
+    cout<<"max heap is ";
+    for(int i=0;i<v.size();i++)
+        cout<<v[i]<<" ";
+    
+}
+
+
