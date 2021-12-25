@@ -3,6 +3,11 @@
 #include<iostream>
 using namespace std;
 
+
+TIME : O(N) + k*log(N) 
+//O(N) create min heap
+//k*log(N) -- remove  top and heapify
+
 int kthsmallest(int arr[],int n,int k)
 {
     //create min heap
