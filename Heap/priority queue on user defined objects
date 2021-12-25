@@ -1,0 +1,45 @@
+#include<iostream>
+#include<queue>
+#include<string>
+using namespace std;
+class person
+{
+public:
+    string name;
+    int age;
+ 
+public:
+    person(string s,int a):name(s),age(a){
+        
+    }
+};
+
+class personcompare
+{
+public:
+    bool operator()(person A,person B)
+    {
+        return A.age < B.age;
+    }
+    
+};
+
+int main()
+{
+    person ob1("pavan",34);
+    person ob2("raam",64);
+    person ob3("sham",44);
+    person ob4("rose",14);
+    
+    priority_queue<person,vector<person>,personcompare> pq;
+    pq.push(ob1);
+    pq.push(ob2);
+    pq.push(ob3);
+    pq.push(ob4);
+    
+    while(!pq.empty())
+    {
+        cout<<pq.top().name<<" "<<pq.top().age<<endl;
+        pq.pop();
+    }
+}
