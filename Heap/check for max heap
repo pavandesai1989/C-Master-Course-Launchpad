@@ -1,0 +1,19 @@
+bool isMaxHeap(int arr[], int n) 
+{
+    //get the 1st non leaf node
+    int last = (n-1)/2;
+    for(int i=1;i<n;i++)
+  {
+    int left = 2*i;
+    int right = 2*i + 1;
+    int last = n-1;
+    
+   if(left<=last && arr[i] < arr[left])
+        return false;
+    
+    if(right<=last && arr[i] < arr[right])
+        return false;
+   }
+    
+    return true;
+}
