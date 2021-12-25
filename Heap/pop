@@ -1,0 +1,115 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+//implement using vectors
+class heap
+{
+private:
+    vector<int> m_vec;
+    bool m_minheap;
+    bool compare(int a,int b)
+    {
+        if(m_minheap)
+            return b>a;
+        else
+            return a>b;
+    }
+public:
+    heap(int default_size=10,bool minheap=true){
+        m_vec.reserve(default_size);
+        m_vec.push_back(-1); //we dt use first block
+        m_minheap = minheap;
+    }
+    
+    void print()
+    {
+        vector<int>::iterator it = m_vec.begin();
+        std::advance(it,1);
+        for(it;it!=m_vec.end();it++)
+        {
+            cout<< (*it) <<" ";
+        }
+        cout<<endl<<endl;
+    }
+//
+    void push(int x)
+    {
+        m_vec.push_back(x);
+        unsigned long idx = m_vec.size()-1; //current index at which we need insertion
+        //get the parent
+        unsigned long parent = idx/2;
+        
+        //compare till root
+        while(idx>1 && compare(m_vec[idx],m_vec[parent]))
+        {
+            swap(m_vec[idx],m_vec[parent]);
+            //update idx and parent
+            idx = parent;
+            parent = idx/2;
+            
+        }
+    }
+    int gettop()
+    {
+        return m_vec[1];
+    }
+    void pop();
+    void heapify(int idx);
+};
+
+void heap::heapify(int idx)
+{
+   //get the left and right child
+    int left = 2*idx;
+    int right = 2*idx + 1;
+    
+    //assume idx as min_idx
+    int min_idx = idx;
+    //both left and right must be less than the last idx
+    int last_idx = (static_cast<int>(m_vec.size()-1 ));
+    
+    if(left<=last_idx && m_vec[left] < m_vec[idx])
+        min_idx = left;
+    
+    if(right<=last_idx && m_vec[right] < m_vec[min_idx])
+        min_idx = right;
+    
+    //min_idx points to smaller between 3 nodes
+    if(min_idx!=idx)  //base case for recursion
+    {
+        swap(m_vec[min_idx],m_vec[idx]);
+        heapify(min_idx);
+    }
+    
+}
+
+void heap::pop()
+{
+    //swap the first and last ele
+    int last_idx = (static_cast<int>(m_vec.size()-1 ));
+    std::swap(m_vec[last_idx],m_vec[1]);
+    //pop last element
+    m_vec.pop_back();
+    //call the heapify
+    heapify(1);
+}
+
+
+int main()
+{
+    heap myheap(6,true);
+    myheap.push(14);
+    myheap.push(6);
+    myheap.push(7);
+    myheap.push(10);
+    myheap.push(8);
+    myheap.push(12);
+    
+    myheap.print();
+    myheap.pop();
+    myheap.print();
+
+}
+
