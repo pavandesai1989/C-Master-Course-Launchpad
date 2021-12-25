@@ -4,6 +4,52 @@
 using namespace std;
 
 
+Using the max heap
+TIme : klog(k) + (n-k) logk // efficeint 
+
+int kthsmallestEfficient(int arr[],int n,int k)
+{
+//we want kth smallest value.create max heap of size k
+       priority_queue<int> pq;
+       for(int i=0;i<k;i++)
+          pq.push(arr[i]); // element at top is kth smallest ele
+       
+       
+       for(int i=k;i<n;i++)
+       {
+          if(arr[i] < pq.top())
+          {
+              pq.pop();
+              pq.top();
+          }
+       }
+       
+       return pq.top();
+}
+
+
+int kthsmallest(int arr[],int n,int k)
+{
+   //we want kth smallest value.create max heap of size k
+   priority_queue<int> pq;
+   for(int i=0;i<k;i++)
+      pq.push(arr[i]); // element at top is kth smallest ele
+   
+   
+   for(int i=k;i<n;i++)
+   {
+      if(arr[i] < pq.top())
+      {
+          pq.pop();
+          pq.top();
+      }
+   }
+   
+   return pq.top();
+
+}
+
+
 TIME : O(N) + k*log(N) 
 //O(N) create min heap
 //k*log(N) -- remove  top and heapify each times .
