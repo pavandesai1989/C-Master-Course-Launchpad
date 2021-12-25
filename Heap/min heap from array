@@ -1,0 +1,48 @@
+//time : O(N)
+
+void heap::minheapify(vector<int> &vec, int idx)
+{
+    //get the keft and righ nodes
+    int left = 2*idx;
+    int right = 2*idx + 1;
+    
+    //last node
+    int last = static_cast<int>(vec.size()-1);
+    int min = idx;
+    
+    if(left<=last && vec[left]<vec[idx])
+        min = left;
+    
+    if(right<=last && vec[right]<vec[min])
+        min=right;
+    
+    if(min!=idx)
+    {
+        swap(vec[min],vec[idx]);
+        minheapify(vec,idx);
+    }
+}
+
+
+void buildMinheapfromarray(vector<int> &vec,int idx)
+{
+    //get the first non leaf node
+    int nonleaf = static_cast<int>((vec.size()-1)/2);
+    cout<<"size is "<<nonleaf<<endl;
+    for(int i=nonleaf;i>=1;i--)
+    {
+        minheapify(vec,i);
+    }
+}
+
+
+
+int main()
+{
+    vector<int> vec = {-1,10,20,5,1};
+    
+    buildMinheapfromarray(vec,1);
+    
+    for(int i=1;i<vec.size();i++)
+        cout<<vec[i]<<" ";     // 1 10 5 20 
+}
