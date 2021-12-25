@@ -1,0 +1,27 @@
+//let us say we want to find 3rd largest ele in array
+create min heap of 3 elements . ele at the top will be the 3rd largest element. start traversing from i=k to end of array,
+if the arr[k]>top element then push the elemnt to the queue else skip
+final top elemnt will our answer.
+
+#include<queue>
+int kthLargest(int* arr, int n, int k) 
+{
+    //create a min heap
+    priority_queue<int,vector<int>,greater<int> > pq;
+    
+    for(int i=0;i<k;i++)
+       pq.push(arr[i]);
+       
+    //traverse from the i=k to end
+    for(int i=k;i<n;i++)
+    {
+       if(arr[k] > pq.top())
+       {
+          //pop the top element and push new element
+          pq.pop();  //imp step
+          pq.push(arr[k]);
+       }
+    }
+    
+    return pq.top();
+}
