@@ -24,7 +24,7 @@ void heap::minheapify(vector<int> &vec, int idx)
 }
 
 
-void buildMinheapfromarray(vector<int> &vec,int idx)
+void buildMinheapfromarray(vector<int> &vec)
 {
     //get the first non leaf node
     int nonleaf = static_cast<int>((vec.size()-1)/2);
@@ -41,7 +41,7 @@ int main()
 {
     vector<int> vec = {-1,10,20,5,1};
     
-    buildMinheapfromarray(vec,1);
+    buildMinheapfromarray(vec);
     
     for(int i=1;i<vec.size();i++)
         cout<<vec[i]<<" ";     // 1 10 5 20 
