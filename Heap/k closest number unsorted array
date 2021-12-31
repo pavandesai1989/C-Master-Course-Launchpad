@@ -1,0 +1,52 @@
+
+#include <iostream>
+#include<vector>
+#include<queue>
+#include<utility>
+using namespace std;
+
+
+
+vector<int> closest(vector<int> vec,int n,int val)
+{
+    //create vector of diff of val and array element
+    vector<pair<int,int>> v;
+    for(int i=0;i<vec.size();i++)
+    {
+       pair<int,int> p = make_pair(abs(vec[i]-val),vec[i]);
+       v.push_back(p);
+    }
+
+    //since we want closet numbers. create max heap of k elements based on abs diff
+    priority_queue<pair<int,int>>  maxheap;
+    for(int i=0;i<n;i++)
+    {
+        maxheap.push(v[i]);
+    }
+
+
+    for(int i=n;i<v.size();i++)
+    {
+        int max = v[i].first;
+        if(max < maxheap.top().first)
+        {
+            maxheap.pop();
+            maxheap.push(v[i]);
+        }
+    }
+
+    while(!maxheap.empty())
+    {
+        cout<<maxheap.top().second<<endl;
+        maxheap.pop();
+    }
+}
+
+int main() 
+{
+	vector<int> vec= {10, 2, 14, 4, 7, 6};
+    closest(vec,3,5);
+
+	return 0;
+}
+
