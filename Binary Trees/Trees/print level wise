@@ -1,0 +1,82 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+template<typename T>
+class TreeNode
+{
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+
+    public:
+    TreeNode(int d)
+    {
+        this->data = d;
+    }
+};
+
+TreeNode<int>* inputlevelwise()
+{
+   
+    int rootdata;
+    cout<<"enter the root data"<<endl;
+    cin>>rootdata;
+    //create root
+    TreeNode<int>* root = new TreeNode<int>(rootdata);
+    queue<TreeNode<int>*> pendingnodes;
+    pendingnodes.push(root);
+    
+    while(!pendingnodes.empty())
+    {
+        TreeNode<int>* front = pendingnodes.front();
+        pendingnodes.pop();
+        cout<<"enter num of children of "<<front->data<<endl;
+        int numchild;
+        cin>>numchild;
+        
+        for(int i=0;i<numchild;i++)
+        {
+            int childdata;
+            cout<<"enter the "<<i<<" th child of "<<front->data<<endl;
+            cin>>childdata;
+            
+            TreeNode<int>* child = new TreeNode<int>(childdata);
+            front->children.push_back(child);
+            //push child to the  queue
+            pendingnodes.push(child);
+            
+        }
+    }
+    return root;
+}
+
+void printlevelwise(TreeNode<int>* root)
+{
+    queue<TreeNode<int>*> pendingnodes;
+    pendingnodes.push(root);
+    
+    while(!pendingnodes.empty())
+    {
+        TreeNode<int>* front = pendingnodes.front();
+        pendingnodes.pop();
+        cout<<front->data<<" ";
+        
+        for(int i=0;i<front->children.size();i++)
+        {
+            pendingnodes.push(front->children[i]);
+        }
+        
+    }
+}
+
+
+int main()
+{
+    TreeNode<int>* root = inputlevelwise();
+    
+    printlevelwise(root);
+    
+    
+}
