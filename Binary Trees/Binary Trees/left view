@@ -1,1 +1,20 @@
 
+
+void printLeftview(node* root,int level,int& maxlevel)
+{
+    //root left right path
+    if(root == NULL)
+        return;
+    
+    if(maxlevel < level)
+    {
+        //new level reached.print first node
+        cout<<root->data<<" ";
+        //update maxlevel
+        maxlevel = level;
+    }
+    //call on right
+    printLeftview(root->left,level+1,maxlevel);
+    printLeftview(root->right,level+1,maxlevel);
+    
+}
