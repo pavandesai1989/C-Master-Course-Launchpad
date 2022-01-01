@@ -1,0 +1,16 @@
+int countnodesBT(node* root)
+{
+    if(root == NULL)
+        return 0;
+    
+    return 1 + countnodesBT(root->left) + countnodesBT(root->right);
+    
+}
+
+int countsumofnodesBT(node* root)
+{
+    if(root == NULL)
+        return 0;
+    
+    return root->data + countsumofnodesBT(root->left) + countsumofnodesBT(root->right);
+}
