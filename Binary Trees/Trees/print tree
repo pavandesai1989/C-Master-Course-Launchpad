@@ -1,0 +1,60 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+template<typename T>
+class TreeNode
+{
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+
+    public:
+    TreeNode(int d)
+    {
+        this->data = d;
+    }
+};
+
+void printtree(TreeNode<int>* root)
+{
+    cout<<root->data<<endl;
+    //iterate on child and call print
+    for(int i=0;i<root->children.size();i++)
+    {
+        printtree(root->children[i]);
+    }
+}
+
+//modified tree function 
+void printtreeModified(TreeNode<int>* root)
+{
+    cout<<root->data<<":";
+    //print root children
+    for(int i=0;i<root->children.size();i++)
+    {
+        cout<<root->children[i]->data<<",";
+    }
+    cout<<endl;
+    //iterate on child and call print
+    for(int i=0;i<root->children.size();i++)
+    {
+        printtreeModified(root->children[i]);
+    }
+}
+
+
+int main()
+{
+    TreeNode<int>*root = new TreeNode<int>(1); //create a root
+    TreeNode<int>*node1 = new TreeNode<int>(2);
+    TreeNode<int>*node2 = new TreeNode<int>(3);
+    
+    //connect nodes
+    root->children.push_back(node1);
+    root->children.push_back(node2);
+    
+    printtree(root);
+    
+    
+}
