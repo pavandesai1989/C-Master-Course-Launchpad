@@ -1,0 +1,14 @@
+//recursive
+void PrintKthLevelBT(node* root,int k)
+{
+    if(root == NULL)
+        return;
+    
+    if(k == 1)
+    {
+        cout<<root->data<<" ";
+        return;
+    }
+    PrintKthLevelBT(root->left,k-1);
+    PrintKthLevelBT(root->right,k-1);
+}
