@@ -1,0 +1,21 @@
+int IsHeightBalancedhelper(node* root). //Time complexity : O(N)
+{
+    if(!root)
+        return 0;
+    
+    int leftH = IsHeightBalancedhelper(root->left);
+    int rightH = IsHeightBalancedhelper(root->right);
+    
+    if(abs(leftH - rightH) > 1)
+        return -1;
+    else
+        return max(leftH,rightH) + 1;
+}
+
+bool IsHeightBalanced(node* root)
+{
+    if(IsHeightBalancedhelper(root) == -1)
+        return false;
+    else
+        return true;
+}
