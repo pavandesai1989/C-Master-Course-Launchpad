@@ -1,0 +1,14 @@
+The time complexity of the above solution is O(n), where n is the total number of nodes in the binary tree. 
+The program requires O(h) extra space for the call stack, where h is the height of the tree.
+
+    void mirror(Node* node) 
+    {
+        if(node == NULL)
+           return;
+        mirror(node->left);
+        mirror(node->right);
+        //swap nodes
+        Node* temp = node->left;
+        node->left = node->right;
+        node->right = temp;
+    }
