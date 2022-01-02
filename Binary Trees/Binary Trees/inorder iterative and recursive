@@ -1,0 +1,33 @@
+vector<int> iterativeinorder(node* root)
+{
+    stack<node*> st;
+    vector<int> inorder;
+    node* node = root;//begining
+    while(true)
+    {
+        if(node!=nullptr)
+        {
+            st.push(node);
+            node = node->left;
+        }
+        else
+        {
+            //imp
+            if(st.empty())
+                break;
+            node = st.top();
+            st.pop();
+            inorder.push_back(node->data);
+            node = node->right;
+        }
+    }
+    return inorder;
+}
+
+void recursiveinorder(node* root)
+{
+    if(root == NULL) return;
+    recursiveinorder(root->left);
+    cout<<root->data<<" ";
+    recursiveinorder(root->right);
+}
