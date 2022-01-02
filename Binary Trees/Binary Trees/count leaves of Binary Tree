@@ -1,3 +1,7 @@
+//worst time complexity : O(N)
+// space best : O(log n) height of tree .
+in case of skew : O(N) -- space complexity
+
 int countLeaves(Node* root)
 {
     if(root ==  NULL)
