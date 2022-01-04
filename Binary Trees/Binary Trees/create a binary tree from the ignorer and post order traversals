@@ -1,0 +1,39 @@
+node* createtreefrominorderpostorder(int* po,int* in,int s,int e)
+{
+    //base case
+    if(s > e)
+        return NULL;
+    static int i = e;
+    
+    node* root = new node(po[i]);
+    int idx = -1;
+    
+    for(int j=s;j<=e;j++)
+    {
+        if(in[j] == po[i])
+        {
+            idx = j;
+            break;
+        }
+    }
+    i--; //imp
+    
+    root->right = createtreefrominorderpostorder(po,in,idx+1,e);
+    root->left = createtreefrominorderpostorder(po,in,s,idx-1);
+    
+    return root;
+}
+
+int main()
+{
+    int in[] = {4,8,2,5,1,6,3,7};
+    int po[] = {8,4,5,2,6,7,3,1};
+    
+    int n = sizeof(in)/sizeof(int);
+    
+    node* root = createtreefrominorderpostorder(po,in,0,n-1);
+    
+    printlevelwiselinebyline(root);
+    
+    
+}
