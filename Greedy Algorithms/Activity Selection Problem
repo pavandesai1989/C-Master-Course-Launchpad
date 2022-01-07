@@ -1,0 +1,60 @@
+#include<iostream>
+#include<vector>
+#include<utility>
+
+using namespace std;
+
+/******** Space complexity --- O(1)*****************
+/********** Time Complexity is ---- O(n*logn)*******
+
+bool compare(pair<int,int> a, pair<int,int> b)
+{
+    return a.second < b.second;
+}
+
+int printMaxActivities(int s[],int f[],int n)
+{
+    vector<pair<int,int>> act;
+    
+    for(int i=0;i<n;i++)
+    {
+        act.push_back(make_pair(s[i],f[i]));
+    }
+    //sort based on the 2nd value
+    sort(act.begin(),act.end(),compare);
+    
+    //always consider the 1st activity
+    int res =1;
+    int prev = 0;
+    
+    cout<<"taken act is "<<act[0].first<<","<<act[0].second<<endl;
+    
+    for(int j=1;j<n;j++)
+    {
+        if(act[j].first > act[prev].second)
+        {
+            cout<<"taken act is "<<act[j].first<<","<<act[j].second<<endl;
+            res++;
+            prev = j;
+        }
+    }
+    return res;
+    
+}
+
+int main()
+{
+    int s[] =  {1, 3, 0, 5, 8, 5};
+    int f[] =  {2, 4, 6, 7, 9, 9};
+    int n = sizeof(s)/sizeof(s[0]);
+    cout<<printMaxActivities(s, f, n)<<endl;
+    return 0;
+}
+
+//output is 
+taken act is 1,2
+taken act is 3,4
+taken act is 5,7
+taken act is 8,9
+4
+
