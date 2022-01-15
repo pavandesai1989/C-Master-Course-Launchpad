@@ -1,0 +1,50 @@
+/*
+
+Input Specifications
+
+The first line consists of an integer T, the number of test cases. For each test case the first line consists of an integer N, the number of activities. Then the next N lines contains two integers m and n, the start and end time of each activity.
+
+Output Specifications
+
+For each test case find the maximum number of activities that you can do.
+
+
+*/
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+int main()
+{
+    int N;
+    cin>>N;
+    
+    vector<pair<int,int>> vec;
+    
+    for(int i=0;i<N;i++)
+    {
+        int m;
+        int n;
+        cin>>m>>n;
+        
+        vec.push_back(make_pair(m,n));
+    }
+    
+    //always select the first activity
+    int res = 1;
+    int prev =0;
+    
+    for(int i=1;i<vec.size();i++)
+    {
+        if(vec[i].first >= vec[prev].second)
+        {
+            res++;
+            prev = i;
+        }
+    }
+    
+    cout<<"activity "<<res<<endl;
+    
+    
+}
