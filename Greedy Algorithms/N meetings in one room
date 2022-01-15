@@ -2,6 +2,16 @@
   link to the problem:
   https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1/?track=DSASP-Greedy&batchId=154#
 */
+
+/*
+  Time Complexity:
+  O(N) -- to create vector using start and end time
+  O(NlogN) -- sort the vector based on the finish time
+  O(N) -- to get the ans
+  
+  Total Time -- O(NlogN)
+  Space -- O(N)
+ */
     
     int maxMeetings(int start[], int end[], int n)
     {
