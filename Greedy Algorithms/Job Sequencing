@@ -62,7 +62,4 @@ int main()
     // Function call
     printJobScheduling(arr, n);
     return 0;
-
-    
-    
 }
