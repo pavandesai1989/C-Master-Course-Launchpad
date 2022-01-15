@@ -1,0 +1,33 @@
+/*
+  link to the problem:
+  https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1/?track=DSASP-Greedy&batchId=154#
+*/
+    
+    int maxMeetings(int start[], int end[], int n)
+    {
+        vector<pair<int,int>> meetings;
+        
+        for(int i=0;i<n;i++)
+        {
+            meetings.push_back(make_pair(start[i],end[i]));
+            
+        }
+        //sort based on the increasing order of the finish time 
+        sort(meetings.begin(),meetings.end(),[](pair<int,int> a,pair<int,int> b){
+            return a.second < a.first;
+        });
+        //always consider the first meeting
+        int res = 1;
+        int prev = 0;
+        
+        for(int i=1;i<n;i++)
+        {
+            if(meetings[i].first >= meetings[prev].second)
+            {
+                res++;
+                prev = i; //imp
+            }
+        }
+        
+        return res;
+    }
